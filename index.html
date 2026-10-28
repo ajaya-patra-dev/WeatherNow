@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Check current weather conditions, temperature, humidity and wind speed."
+    >
+
+    <title>WeatherNow | Weather Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <a href="#" class="logo">☁ WeatherNow</a>
+
+        <span class="live-label">
+            <span class="status-dot"></span>
+            Weather Dashboard
+        </span>
+    </header>
+
+
+    <main class="container">
+
+        <!-- Introduction -->
+        <section class="intro">
+            <p class="eyebrow">YOUR PERSONAL WEATHER APP</p>
+
+            <h1>Weather, at a glance.</h1>
+
+            <p class="intro-text">
+                Find current weather conditions for cities around the world.
+            </p>
+        </section>
+
+
+        <!-- Search -->
+        <section class="search-section">
+
+            <form id="search-form" class="search-form">
+
+                <label for="city-input" class="visually-hidden">
+                    Enter city name
+                </label>
+
+                <span class="search-icon">⌕</span>
+
+                <input
+                    type="search"
+                    id="city-input"
+                    placeholder="Search a city, e.g. Bhubaneswar"
+                    autocomplete="off"
+                    required
+                    maxlength="100"
+                >
+
+                <button type="submit" id="search-btn">
+                    Search
+                </button>
+
+            </form>
+
+            <p class="search-hint">
+                Try Bhubaneswar, London, Tokyo or New York.
+            </p>
+
+        </section>
+
+
+        <!-- Status Messages -->
+        <div id="status-message" class="status-message hidden"
+            role="status" aria-live="polite">
+        </div>
+
+
+        <!-- Weather Dashboard -->
+        <section id="weather-dashboard" class="weather-dashboard hidden">
+
+            <div class="weather-main-card">
+
+                <div class="weather-location">
+
+                    <div>
+                        <p class="eyebrow">CURRENT WEATHER</p>
+
+                        <h2 id="city-name">City</h2>
+
+                        <p id="location-details">
+                            Location information
+                        </p>
+                    </div>
+
+                    <button id="refresh-btn" class="refresh-btn"
+                        type="button" aria-label="Refresh weather">
+                        ↻
+                    </button>
+
+                </div>
+
+
+                <div class="current-weather">
+
+                    <div class="weather-icon" id="weather-icon">
+                        ☀️
+                    </div>
+
+                    <div class="temperature-block">
+
+                        <p class="temperature">
+                            <span id="temperature">--</span><sup>°C</sup>
+                        </p>
+
+                        <p id="weather-description">
+                            Loading weather...
+                        </p>
+
+                        <p class="feels-like">
+                            Feels like
+                            <strong id="feels-like">--°C</strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="weather-divider"></div>
+
+
+                <div class="weather-footer">
+
+                    <div>
+                        <span>🌡️</span>
+                        <p>High / Low</p>
+                        <strong id="high-low">-- / --°C</strong>
+                    </div>
+
+                    <div>
+                        <span>☀️</span>
+                        <p>UV Index</p>
+                        <strong id="uv-index">--</strong>
+                    </div>
+
+                    <div>
+                        <span>🕒</span>
+                        <p>Local Time</p>
+                        <strong id="local-time">--:--</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Weather Details -->
+            <section class="details-section">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">WEATHER DETAILS</p>
+                        <h2>Today's Conditions</h2>
+                    </div>
+                </div>
+
+
+                <div class="details-grid">
+
+                    <article class="detail-card">
+                        <div class="detail-icon">💧</div>
+                        <p>Humidity</p>
+                        <h3 id="humidity">--%</h3>
+                        <span>Moisture in the air</span>
+                    </article>
+
+                    <article class="detail-card">
+                        <div class="detail-icon">💨</div>
+                        <p>Wind Speed</p>
+                        <h3 id="wind-speed">-- km/h</h3>
+                        <span>Current wind conditions</span>
+                    </article>
+
+                    <article class="detail-card">
+                        <div class="detail-icon">🌧️</div>
+                        <p>Precipitation</p>
+                        <h3 id="precipitation">-- mm</h3>
+                        <span>Current precipitation</span>
+                    </article>
+
+                    <article class="detail-card">
+                        <div class="detail-icon">🌡️</div>
+                        <p>Pressure</p>
+                        <h3 id="pressure">-- hPa</h3>
+                        <span>Atmospheric pressure</span>
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- Forecast -->
+            <section class="forecast-section">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">PLAN AHEAD</p>
+                        <h2>5-Day Forecast</h2>
+                    </div>
+                </div>
+
+                <div id="forecast-grid" class="forecast-grid"></div>
+
+            </section>
+
+        </section>
+
+
+        <!-- Initial Empty State -->
+        <section id="welcome-state" class="welcome-state">
+
+            <div class="welcome-icon">🌤️</div>
+
+            <h2>Ready to explore the weather?</h2>
+
+            <p>
+                Enter a city above to discover its current weather
+                and upcoming forecast.
+            </p>
+
+        </section>
+
+
+        <footer class="footer">
+            <p>WeatherNow — Built with HTML, CSS and JavaScript.</p>
+
+            <p>
+                Weather data provided by
+                <a href="https://open-meteo.com/"
+                    target="_blank"
+                    rel="noopener noreferrer">
+                    Open-Meteo
+                </a>.
+            </p>
+        </footer>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
